@@ -7,16 +7,6 @@ import usersRoute from "./routes/users.js"
 import roomsRoute from "./routes/rooms.js"
 const app = express();
 dotenv.config()
-// const  connect =async()=>{
-// try{
-
-//     await mongoose.connect(process.env.MONGO);
-//     console.log("connected to mongo db")
-// }
-// catch(error){
-//     throw error
-// }
-// }
 
 const connect = async () => {
     try {
@@ -42,6 +32,7 @@ console.log("mongo db connected")
 
 })
 
+//middlewares
 app.use(express.json());
 
 app.use("/api/auth",authRoute)
@@ -49,7 +40,9 @@ app.use("/api/users",usersRoute)
 app.use("/api/hotels",hotelsRoute)
 app.use("/api/rooms",roomsRoute)
 
-
+app.use((req,res,next)=>{
+  console.log("hi i am a middleware")
+})
 
 
 const PORT = process.env.PORT || 8800;
